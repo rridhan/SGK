@@ -8,8 +8,9 @@
 //
 // Configuration
 //
-
+@import 'helper.less';
 @font-size: 16; 		// Your base font-size in pixels
+@line: 24;
 @em: @font-size*1em;	// Shorthand for outputting ems, e.g. "12/@em"
 
 @column: 48;	// The column-width of your grid in pixels
@@ -78,116 +79,631 @@ html {
 	-webkit-text-size-adjust: 100%; 
 	-ms-text-size-adjust: 100%;
 }
-
-	body {min-height: 100%; font-size: 100%;}
-
+body {
+	min-height: 100%; 
+	font-size: 100%;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, nav, section, audio, canvas, video {
+	display: block;
+}
 sub, sup {
 	font-size: 75%; 
 	line-height: 0; 
 	position: relative; 
 	vertical-align: baseline;
 }
-
-	sup {top: -0.5em;}
-	sub {bottom: -0.25em;}
-
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
 pre {
 	white-space: pre; 
 	white-space: pre-wrap; 
 	word-wrap: break-word;
 }
-
-b, strong {font-weight: bold;}
-abbr[title] {border-bottom: 1px dotted;}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+b, strong {
+	font-weight: bold;
 }
-
-a img, img {
-	-ms-interpolation-mode: bicubic;
-	border: 0;
+abbr[title] {
+	border-bottom: 1px dotted;
 }
-
 input, textarea, button, select {
 	margin: 0;
 	font-size: 100%;
 	line-height: normal;
 	vertical-align: baseline;
 }
-
-	button,
-	html input[type="button"], 
-	input[type="reset"], 
-	input[type="submit"] {
-	    cursor: pointer;
-	    -webkit-appearance: button;
-	}
-	
-	input[type="checkbox"],
-	input[type="radio"] {
-		-webkit-box-sizing: border-box;
-		   -moz-box-sizing: border-box;
-			 -o-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-				box-sizing: border-box;
-	}
-	
-	textarea {overflow: auto;}
-
-
+button,
+html input[type="button"], 
+input[type="reset"], 
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+}
+input[type="checkbox"],
+input[type="radio"] {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+		 -o-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+			box-sizing: border-box;
+}
+textarea {
+	overflow: auto;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a img, img {
+	-ms-interpolation-mode: bicubic;
+	border: 0;
+}
 /*
-	These are easy to forget
+	Type presets
 */
 
-::selection {
-	background: red;
-	color: white;
-}
-::-moz-selection {
-	background: red;
-	color: white;
+body {
+	font-size: @font-size / 16*1em;
+	line-height: @line / @em;
+	font-family: futura-pt, Futura, "Trebuchet MS", sans-serif;
 }
 
+.small, #nav span, #downloads strong {
+	font-size: 13/@em;
+	line-height: @line/13*1em;
+}
+
+.normal, h1, h2, h3, h4 {
+	font-size: 1em;
+}
+
+.big {
+	font-size: 23/@em;
+	line-height: 24/23*1em;
+}
+
+.large {
+	font-size: 27/@em;
+	line-height: 36/27*1em;
+}
+
+.huge {
+	font-size: 44/@em;
+	line-height: 48/44*1em;
+}
+
+.enormous {
+	font-size: 72/@em;
+	line-height: 72/72*1em;
+}
+
+.gigantic {
+	font-size: 116/@em;
+	line-height: 120/116*1em;
+}
+article p {
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+			hyphens: auto;
+}
+
+h2 {
+	padding-top: 48/@em;
+}
+
+h3 {
+	margin-top: 24/@em;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	font-weight: 500;
+}
+
+#header h1, h2 {
+	text-transform: uppercase;
+	letter-spacing: 1.1/@em;
+}
+/*
+	Colours & links
+*/
+
+@body: rgb(37,37,37);
+@emphasis: rgb(23,23,23);
+@aside: rgb(97,97,97);
+@background: rgb(255,255,255);
+@highlight: rgb(232,232,232);
+@link: rgb(232,76,56);
+
+body {
+	background: @background;
+	color: @body;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: @emphasis;
+}
+
+a {
+	color: @emphasis;
+	text-decoration: none;
+	border-bottom: 1.1/@em solid @emphasis;
+}
+
+a:hover {
+	color: @link;
+	border-bottom-color: @link;
+}
+
+a:active {
+	color: @aside;
+	border-bottom-color: @aside;
+}
+
+::selection {
+	background: @link;
+	color: @background;
+}
+::-moz-selection {
+	background: @link;
+	color: @background;
+}
 img::selection {
 	background: transparent;
 }
 img::-moz-selection {
 	background: transparent;
 }
-
 body {
-	-webkit-tap-highlight-color: rgba(255,0,0, 0.62);
+	-webkit-tap-highlight-color: fadeout(@link, 62%);
 }
 
 
 /*
-	Style overrides for IE6-8
-	http://jonikorpi.com/leaving-old-IE-behind/
+	Typekit failsafe
 */
 
-.ie {
+h1, h2, h3, h4, h5, h6, p, #nav li {
+	visibility: visible;
+}
+#grid {
+	height: @4cols;
+	position: relative;
+	overflow: hidden;
+}
+
+	.col {
+		background: @highlight;
+		height: 100%;
+		width: @1col;
+		position: absolute;
+		left: 50%; top: 0;
+		margin-left: 12/@em;
+	}
+	
+	.col {
+		.transition(background-color 0.382s ease-out);
+	}
+	
+	.col2 {margin-left: (1*72+12)/@em;}
+	.col3 {margin-left: (2*72+12)/@em;}
+	.col4 {margin-left: (3*72+12)/@em;}
+	.col5 {margin-left: (4*72+12)/@em;}
+	.col6 {margin-left: (5*72+12)/@em;}
+	.col7 {margin-left: (6*72+12)/@em;}
+	.col8 {margin-left: (7*72+12)/@em;}
+	.col9 {margin-left: (8*72+12)/@em;}
+	.col10 {margin-left: (9*72+12)/@em;}
+	.col11 {margin-left: (10*72+12)/@em;}
+	.col12 {margin-left: (11*72+12)/@em;}
+	.col13 {margin-left: (12*72+12)/@em;}
+	.col14 {margin-left: (13*72+12)/@em;}
+	.col15 {margin-left: (14*72+12)/@em;}
+	.col16 {margin-left: (15*72+12)/@em;}
+	.col17 {margin-left: (16*72+12)/@em;}
+	.col18 {margin-left: (17*72+12)/@em;}
+	.col19 {margin-left: -(1*72-12)/@em;}
+	.col20 {margin-left: -(2*72-12)/@em;}
+	.col21 {margin-left: -(3*72-12)/@em;}
+	.col22 {margin-left: -(4*72-12)/@em;}
+	.col23 {margin-left: -(5*72-12)/@em;}
+	.col24 {margin-left: -(6*72-12)/@em;}
+	.col25 {margin-left: -(7*72-12)/@em;}
+	.col26 {margin-left: -(8*72-12)/@em;}
+	.col27 {margin-left: -(9*72-12)/@em;}
+	.col28 {margin-left: -(10*72-12)/@em;}
+	.col29 {margin-left: -(11*72-12)/@em;}
+	.col30 {margin-left: -(12*72-12)/@em;}
+	.col31 {margin-left: -(13*72-12)/@em;}
+	.col32 {margin-left: -(14*72-12)/@em;}
+	.col33 {margin-left: -(15*72-12)/@em;}
+	.col34 {margin-left: -(16*72-12)/@em;}
+	.col35 {margin-left: -(17*72-12)/@em;}
+	.col36 {margin-left: -(18*72-12)/@em;}
+		
+	.col1, .col2, .col3, .col4, .col19, .col20, .col21, .col22 {
+		background: @emphasis;
+	}
+
+/*
+	Full page zooms
+	0.882352941 0.941176471 1.058823529 1.117647059
+*/
+
+@media screen and (max-width: 16.875em) {	
+	body {
+		font-size: (@font-size - 2)/16*1em;
+	}
+	#masthead, #introduction, article section, #colophon {
+		padding-left: 10/@em;
+		padding-right: 10/@em;
+	}
+}
+
+@media screen and (max-width: 19.9375em) {
+	body {
+		font-size: (@font-size - 1)/16*1em;
+	}
+}
+
+@media 
+	screen and (min-width: 32.5em) and (max-width: 37.4375em),
+	screen and (min-width: 45em) and (max-width: 56.9375em),
+	screen and (min-width: 77.5em) and (max-width: 102.4375em),
+	screen and (min-width: 135em) {
+	body {
+		font-size: (@font-size + 1)/16*1em;
+	}
+}
+
+@media 
+	screen and (min-width: 102.5em) and (max-width: 117.9375em),
+	screen and (min-width: 150em) {
+	body {
+		font-size: (@font-size + 2)/16*1em;
+	}
+}
+
+
+/*
+	Mobile layout 
+	240–479 px
+	Zoomed out below 320 px
+*/
+
+@media screen and (min-width: 15em) {
+	
+	#masthead, #introduction, article section, #colophon {
+		width: @4cols;
+		max-width: none;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	#masthead h1, #masthead p, #introduction span, #follow span {
+		display: inline;
+	}
+	
+	.col3, .col4, .col21, .col22 {
+		background: @highlight;
+	}
 	
 }
 
 
 /*
-	An easy way to zoom your entire layout in or out (as long as it's set in ems).
-	Just change the media queries to activate them.
-	Assuming your base font-size is 16:
-	- the first one zooms out by a factor of (16-2)/16 = 0.875
-	- the second one zooms in by a factor of (16+2)/16 = 1.125  
+	Wide mobile layout 
+	480-767 px
+	Zoomed in above 480 px
 */
 
-@media screen and (max-width: 1px) {
-	body {
-		font-size: (@font-size - 2)/16*1em;
+@media screen and (min-width: 30em) {
+	
+	#masthead, #introduction, article section, #colophon {
+		width: @6cols;
 	}
+	
+	#masthead h1, #masthead p, #introduction span, #follow span {
+		display: block;
+	}
+	
+	#nav {
+		margin-left: 72/@em;
+	}
+	
+	#grid {
+		height: @3cols;
+	}
+	
+		.col3, .col21 {
+			background: @emphasis;
+		}
+	
+	#build figure {
+		height: @3cols;
+	}
+	
 }
 
-@media screen and (max-width: 1px) {
-	body {
-		font-size: (@font-size + 2)/16*1em;
+
+/*
+	Tablet layout 
+	600-911 px
+	Zoomed in above 600 px
+*/
+
+@media screen and (min-width: 37.5em) {
+	
+	#masthead, #introduction, article section, #colophon {
+		width: @8cols;
 	}
+	
+	#masthead {
+		text-align: left;
+		position: relative;
+		padding-top: 36/@em;
+	}	
+	
+		#masthead h1 {
+			float: left;
+			margin-right: 4/@em;
+		}
+	
+		#masthead p {
+			width: @4cols;
+		}
+		
+		#nav {
+			position: absolute;
+			right: 0; top: 12/@em;
+		}
+		
+	#introduction {
+		padding-top: 72/@em;
+	}
+		
+		#introduction h1, #follow h1 {
+			.large();
+		}
+	
+	#grid {
+		height: @5cols;
+	}
+	
+		.col4, .col22 {
+			background: @emphasis;
+		}
+	
+	article h2 {
+		.large();
+		letter-spacing: 1.1/27*1em;
+		padding-top: 72/27*1em;
+	}
+	
+	#build figure {
+		height: @4cols;
+	}
+	
+	#author, #promo {
+		width: @4cols;
+		float: left;
+	}
+	
+		#author {
+			padding: 0 24/@em 0 0;
+		}
+	
+	#copyright {
+		clear: both;
+	}
+	
+}
+
+
+/*
+	Widescreen layout 
+	912-1887 px
+	Zoomed in above 912 px
+*/
+
+@media screen and (min-width: 57em) {
+	
+	#masthead, #introduction, article section, #colophon {
+		width: @12cols;
+	}
+	
+	#masthead {
+		padding-top: 48/@em;
+	}
+	
+		#masthead h1 {
+			.huge();
+			width: auto;
+			letter-spacing: 2/44*1em;
+		}
+		
+		#masthead p {
+			position: absolute;
+			left: (24/@em)+@4cols; top: 48/@em;
+			width: @3cols;
+		}
+	
+		#nav {
+			top: 24/@em;
+		}
+			
+	#introduction h1 {
+		.huge();
+	}
+		
+	#grid {
+		height: @6cols;
+	}
+	
+		.col5, .col6, 
+		.col23, .col24 {
+			background: @emphasis;
+		}
+	
+	#build .wrapper {
+		position: relative;
+		padding-left: (@gutter/@em)+@4cols;
+		min-height: @3cols;
+	}
+			
+		#build figure {
+			width: @4cols;
+			height: @3cols;
+			margin: 0;
+			position: absolute;
+			left: 0; top: 0;
+		}
+		
+		#build #infinite {
+			height: @3cols - (4/@em);
+			width: @4cols - (4/@em);
+		}
+
+	#colophon {
+		margin-top: 72/@em;
+		border-top: 2/@em solid @emphasis;
+		padding-top: 22/@em;
+	}
+		
+		#follow {
+			float: left;
+			width: @4cols;
+			padding: 36/@em 24/@em 0 0;
+			border: 0;
+		}
+	
+			#follow h1 {
+				.normal();
+				text-align: left;
+			}
+			
+			#follow span {display: inline;}
+			
+		#copyright {
+			padding-left: @gutter/@em + @4cols;
+		}
+	
+}
+
+@media screen and (min-width: 57em) and (max-width: 117.9375em) {
+	
+	#downloads h3, #faq h3 {
+		float: left;
+		clear: left;
+		width: @4cols;
+		padding-top: 23/@em;
+	}
+	
+		#downloads p, #faq p {
+			padding-left: (24/@em)+@4cols;
+			margin-top: 24/@em;
+			border-top: 1.1/@em solid @highlight;
+			padding-top: 23/@em;
+		}
+	
+}
+
+
+/*
+	Huge-screen layout 
+	1888-2520 px
+	Zoomed in above 1920 px
+*/
+
+@media screen and (min-width: 118em) {
+
+	#masthead, article .container, #introduction, #colophon {
+		width: @13cols+@13cols+(24/@em);
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+		article section {
+			width: @6cols;
+			margin-left: @1cols+(2*24/@em);
+			float: left;
+		}
+		
+			#build {
+				width: @12cols;
+				padding-bottom: 96/@em;
+				margin-left: 0;
+			}
+	
+	#masthead h1 {
+		.enormous();
+		letter-spacing: 2/72*1em;
+	}
+	
+	#masthead p {
+		.large();
+		top: 48/27*1em;
+		left: (6*(48+24))/27*1em;
+	}
+	
+	#introduction {
+		position: relative;
+		padding-top: 48/@em;
+		padding-bottom: 0;
+	}
+	
+		#introduction h1 {
+			.large();
+			position: absolute;
+			left: (13*(48+24))/27*1em;
+			top: -72/27*1em;
+			text-align: left;
+		}
+		
+	article h2 {
+		padding-top: 48/27*1em;
+	}
+	
+	#grid {
+		height: @10cols;
+	}
+	
+		.col7, .col8, .col9, .col10, .col11, .col12, .col13,
+		.col25, .col26, .col27, .col28, .col29, .col30, .col31 {
+			background: @emphasis;
+		}
+		
+	#colophon {
+		clear: both;
+	}
+	
+		#colophon section {
+			padding-bottom: 72/@em;
+		}
+	
+		#follow {
+			width: @6cols;
+			padding-top: 0;
+		}
+		
+			#follow h1 {
+				.large();
+				font-style: normal;
+			}
+	
+		#promo, #author {
+			width: @6cols;
+			padding-right: (2*24/@em)+@1col;
+		}
+		
+		#copyright {
+			float: left;
+			width: @6cols;
+			clear: none;
+			padding: 0;
+		}
+	
 }
